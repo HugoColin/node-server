@@ -1,21 +1,25 @@
 const exprees = require( 'express' );
+const cors = require( 'cors' );
 
 class Server{
 
     constructor(){
+
         this.app = exprees();
         this.port = process.env.PORT;
+        this.usuariosPath = '/api/usuarios';
 
         // Middlewares
         this.middlewares();
 
         // Rutas de mi aplicacion
-
-
         this.routes();
     }
 
     middlewares(){
+
+        // Cors
+        this.app.use( cors() );
 
         // Directorio público
         this.app.use( exprees.static( 'public' ) );
@@ -23,30 +27,8 @@ class Server{
     }
 
     routes(){
-
-        this.app.get( '/api', ( require, response ) => {
-            response.json( {
-                msg: 'get API',
-            } );
-        } );
-
-        this.app.post( '/api', ( require, response ) => {
-            response.json( {
-                msg: 'post API',
-            } );
-        } );
-
-        this.app.put( '/api', ( require, response ) => {
-            response.json( {
-                msg: 'put API',
-            } );
-        } );
-
-        this.app.delete( '/api', ( require, response ) => {
-            response.json( {
-                msg: 'delete API',
-            } );
-        } );
+        
+        this.app.use( this.usuariosPath, require( '../routes/usuarios' ) );
 
     }
 
