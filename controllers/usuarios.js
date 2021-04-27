@@ -1,22 +1,36 @@
-const { response } = require( 'express' );
+const { request, response } = require( 'express' );
 
-const usuariosGet = ( req, res = response ) => {
+const usuariosGet = ( req = request, res = response ) => {
+
+    // query: objeto que trae todos los parámetros que fueron pasados a través de la url
+    const { q, nombre, apikey } = req.query;
 
     res.status( 201 ).json( {
         msg: 'get API - controlador',
+        q,
+        nombre,
+        apikey,
     } );
 };
 
 const usuariosPost = ( req, res = response ) => {
 
+    const { nombre, edad } = req.body;
+
     res.json( {
         msg: 'post API - controlador',
+        nombre,
+        edad,
     } );
 };
 
-const usuariosPut = ( require, res = response ) => {
+const usuariosPut = ( req, res = response ) => {
+
+    const { id } = req.params;
+
     res.json( {
         msg: 'put API - controlador',
+        id,
     } );
 }
 

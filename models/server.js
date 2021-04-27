@@ -21,6 +21,9 @@ class Server{
         // Cors
         this.app.use( cors() );
 
+        // Lectura y Parseo del body
+        this.app.use( exprees.json() );
+
         // Directorio público
         this.app.use( exprees.static( 'public' ) );
 
@@ -38,7 +41,6 @@ class Server{
             console.log( 'Servidor corriendo en puerto:', this.port );
         } );
     }
-
 }
 
 module.exports = Server;
